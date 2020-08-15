@@ -11,6 +11,7 @@ import {
   TextField,
   Radio,
 } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import VerifiedUserOutlined from "@material-ui/icons/VerifiedUserOutlined";
 import withStyles from "@material-ui/core/styles/withStyles";
 import firebase from "../firebase";
@@ -240,6 +241,18 @@ const AddPage = (props) => {
                                     }}
                                   >
                                     Save
+                                  </Button>
+
+                                  <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    className={classes.button}
+                                    startIcon={<DeleteIcon />}
+                                    onClick={() => {
+                                      OnDelete(phone.id);
+                                    }}
+                                  >
+                                    Delete
                                   </Button>
                                 </Form>
                               </td>
