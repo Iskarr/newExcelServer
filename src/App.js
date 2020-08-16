@@ -6,6 +6,7 @@ import Register from "./Login/Register";
 import ServerStatus from "./editData/ServerStatus";
 import EditPage from "./editData/EditPage";
 import AddPage from "./editData/AddPage";
+import Filler from "./editData/Filler";
 
 import firebase from "./firebase";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -35,6 +36,7 @@ export default function App() {
           <Route exact path="/serverstatus" component={ServerStatus} />
           <Route exact path="/editpage" component={EditPage} />
           <Route exact path="/addpage" component={AddPage} />
+          <Route exact path="/filler" component={Filler} />
         </Switch>
       </Router>
     </MuiThemeProvider>

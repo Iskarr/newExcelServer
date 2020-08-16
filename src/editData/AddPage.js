@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Paper, Avatar, Button, Input } from "@material-ui/core";
+import {
+  Typography,
+  Paper,
+  Avatar,
+  Button,
+  Input,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from "@material-ui/core";
 import VerifiedUserOutlined from "@material-ui/icons/VerifiedUserOutlined";
 import withStyles from "@material-ui/core/styles/withStyles";
 import firebase from "../firebase";
@@ -12,10 +21,6 @@ const AddPage = (props) => {
   const [newPhoneName, setNewPhoneName] = useState();
   const [newNote, setNewNote] = useState("");
   const [newStatus, setNewStatus] = useState();
-  const [newOS, setNewOS] = useState();
-  //   const [size_inch, setSizeInch] = useState("");
-  //   const [size_cm, setSizeCM] = useState("");
-  //   const [editing, setEditing] = useState(false);
   const { classes } = props;
 
   useEffect(() => {
@@ -64,7 +69,7 @@ const AddPage = (props) => {
             Hello {firebase.getCurrentUsername()}
           </Typography>
           <>
-            <Typography>Edit Page</Typography>
+            <Typography>Add a Server</Typography>
             <form onSubmit={onCreate}>
               <Label>Server Name:</Label>
               <Input
@@ -75,12 +80,30 @@ const AddPage = (props) => {
               />
               <br />
               <Label>Server Status:</Label>
-              <Input
-                type="text"
-                required
-                value={newStatus}
-                onChange={(e) => setNewStatus(e.currentTarget.value)}
-              />
+              <RadioGroup
+                defaultValue={"empty"}
+                aria-label="status"
+                name="customized-radios"
+                onChange={(e) => {
+                  setNewStatus(e.target.value);
+                }}
+              >
+                <FormControlLabel
+                  value="updated"
+                  control={<Radio status={"updated"} />}
+                  label="Updated"
+                />
+                <FormControlLabel
+                  value="needs update"
+                  control={<Radio status={"needs update"} />}
+                  label="Needs update"
+                />
+                <FormControlLabel
+                  value="inactive"
+                  control={<Radio status={"inactive"} />}
+                  label="Inactive"
+                />
+              </RadioGroup>
               <br />
               <Label>Server Note:</Label>
               <Input
@@ -96,6 +119,7 @@ const AddPage = (props) => {
                 fullWidth
                 onClick={() => {
                   onCreate(newPhoneName, newStatus, newNote);
+                  props.history.push("/editpage");
                 }}
                 style={{ margin: 10 }}
               >
@@ -135,36 +159,3 @@ const AddPage = (props) => {
 };
 
 export default withRouter(withStyles(styles)(AddPage));
-
-// <label>Operating system:</label>
-//             <input
-//               type="text"
-//               required
-//               value={os}
-//               onChange={(e) => setOS(e.currentTarget.value)}
-//             />
-//             <br />
-//             <label>PPI:</label>
-//             <input
-//               type="number"
-//               required
-//               value={ppi}
-//               onChange={(e) => setPPI(e.currentTarget.value)}
-//             />
-//             <br />
-//             <label>Size CM:</label>
-//             <input
-//               type="number"
-//               required
-//               value={size_cm}
-//               onChange={(e) => setSizeCM(e.currentTarget.value)}
-//             />
-//             <br />
-//             <label>Size Inch:</label>
-//             <input
-//               type="number"
-//               required
-//               value={size_inch}
-//               onChange={(e) => setSizeInch(e.currentTarget.value)}
-//             />
-//             <br />

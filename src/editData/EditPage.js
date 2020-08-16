@@ -46,11 +46,11 @@ const AddPage = (props) => {
 
     //firebase.getCurrentUserQuote().then(setQuote);
   }, [props.history]);
-
+  // Deletes server based on ID, using phone.id
   const OnDelete = (id) => {
     firebase.db.collection("Phones").doc(id).delete();
   };
-
+  // updates the server name to the Phones DB
   const OnUpdateName = (id) => {
     firebase.db
       .collection("Phones")
@@ -62,7 +62,7 @@ const AddPage = (props) => {
         console.log(`phone_Name: ${newPhoneName}`);
       });
   };
-
+  // Saves note to the Phones DB.
   const onSaveNote = (id) => {
     firebase.db
       .collection("Phones")
@@ -72,7 +72,7 @@ const AddPage = (props) => {
         console.log(`The new notes says: ${newNote}`);
       });
   };
-
+  // Sets edit mode true or false.
   function editingMode() {
     if (!editing) {
       setEditing(true);
@@ -84,7 +84,7 @@ const AddPage = (props) => {
       setIfEditing(false);
     }
   }
-
+  // sets the radio status in DB
   function onUpdateRadio(id, newStatus) {
     firebase.db
       .collection("Phones")
@@ -96,7 +96,7 @@ const AddPage = (props) => {
         console.log(`The new status of ${id} is now ${newStatus}`);
       });
   }
-
+  // changes background based on status.
   function checkStatus(status) {
     if (status === "updated") {
       return "green";
@@ -106,7 +106,7 @@ const AddPage = (props) => {
       return "#FC6A03";
     }
   }
-
+  // logout function.
   async function logout() {
     await firebase.logout();
     props.history.push("/");
@@ -318,7 +318,7 @@ const AddPage = (props) => {
             }}
             className={classes.submit}
           >
-            Add Page
+            Add Server
           </Button>
           <Button
             type="submit"
